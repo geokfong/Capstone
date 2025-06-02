@@ -16,11 +16,11 @@ clean_colnames <- function(df) {
   df %>% rename_with(~str_replace_all(., "-", "_"))
 }
 
-df4 <- read_tsv("all_metrics_mincov10.tsv") %>%
+df <- read_tsv("all_metrics_mincov10.tsv") %>%
   clean_colnames()
 
 # Process count data
-df4_count <- df4 %>%
+df_count <- df %>%
   mutate(merged_column = paste(chr, start, end, feature, score, strand, sep = ";")) %>%
   select(merged_column, matches("_count$")) %>%
   mutate(
@@ -40,11 +40,11 @@ df4_count <- df4 %>%
   select(merged_column, SKOV3_Tad_FTO_BT1_count, SKOV3_Tad_FTO_UT_count,
          SKOV3_Apo_RIPK1_BT1_count, SKOV3_Apo_RIPK1_UT_count,
          SKOV3_Apo_FTO_BT1_count, SKOV3_Apo_FTO_UT_count)
-head(df4_count)
-write.csv(df4_count, "rep_count.csv", row.names = FALSE)
+head(df_count)
+write.csv(df_count, "rep_count.csv", row.names = FALSE)
 
 # Process mean data
-df4_mean <- df4 %>%
+df_mean <- df %>%
   mutate(merged_column = paste(chr, start, end, feature, score, strand, sep = ";")) %>%
   select(merged_column, matches("_mean$")) %>%
   mutate(
@@ -64,10 +64,10 @@ df4_mean <- df4 %>%
   select(merged_column, SKOV3_Tad_FTO_BT1_mean, SKOV3_Tad_FTO_UT_mean,
          SKOV3_Apo_RIPK1_BT1_mean, SKOV3_Apo_RIPK1_UT_mean,
          SKOV3_Apo_FTO_BT1_mean, SKOV3_Apo_FTO_UT_mean)
-write.csv(df4_mean, "rep_mean.csv", row.names = FALSE)
+write.csv(df_mean, "rep_mean.csv", row.names = FALSE)
 
 # Process sum data
-df4_sum <- df4 %>%
+df_sum <- df %>%
   mutate(merged_column = paste(chr, start, end, feature, score, strand, sep = ";")) %>%
   select(merged_column, matches("_sum$")) %>%
   mutate(
@@ -87,10 +87,10 @@ df4_sum <- df4 %>%
   select(merged_column, SKOV3_Tad_FTO_BT1_sum, SKOV3_Tad_FTO_UT_sum,
          SKOV3_Apo_RIPK1_BT1_sum, SKOV3_Apo_RIPK1_UT_sum,
          SKOV3_Apo_FTO_BT1_sum, SKOV3_Apo_FTO_UT_sum)
-write.csv(df4_sum, "rep_sum.csv", row.names = FALSE)
+write.csv(df_sum, "rep_sum.csv", row.names = FALSE)
 
 # Score1 for count values
-df4_count_score1 <- df4_count %>%
+df_count_score1 <- df_count %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -114,10 +114,10 @@ df4_count_score1 <- df4_count %>%
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
-write_csv(df4_count_score1, "score1_count_v1.csv")
+write_csv(df_count_score1, "score1_count_v1.csv")
 
 # Score1 for mean values
-df4_mean_score1 <- df4_mean %>%
+df_mean_score1 <- df_mean %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -142,10 +142,10 @@ df4_mean_score1 <- df4_mean %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_mean_score1, "score1_mean_v1.csv")
+write_csv(df_mean_score1, "score1_mean_v1.csv")
 
 # Score1 for sum values
-df4_sum_score1 <- df4_sum %>%
+df_sum_score1 <- df_sum %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -170,10 +170,10 @@ df4_sum_score1 <- df4_sum %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_sum_score1, "score1_sum_v1.csv")
+write_csv(df_sum_score1, "score1_sum_v1.csv")
 
 # Score2 for count values
-df4_count_score2_log <- df4_count %>%
+df_count_score2_log <- df_count %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -199,10 +199,10 @@ df4_count_score2_log <- df4_count %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_count_score2_log, "score2_count_v1.csv")
+write_csv(df_count_score2_log, "score2_count_v1.csv")
 
 # Score2 for mean values
-df4_mean_score2_log <- df4_mean %>%
+df_mean_score2_log <- df_mean %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -228,10 +228,10 @@ df4_mean_score2_log <- df4_mean %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_mean_score2_log, "score2_mean_v1.csv")
+write_csv(df_mean_score2_log, "score2_mean_v1.csv")
 
 # Score2 for sum values
-df4_sum_score2_log <- df4_sum %>%
+df_sum_score2_log <- df_sum %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -257,10 +257,10 @@ df4_sum_score2_log <- df4_sum %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_sum_score2_log, "score2_sum_v1.csv")
+write_csv(df_sum_score2_log, "score2_sum_v1.csv")
 
 # Score3 for count values
-df4_count_score3_zscore <- df4_count %>%
+df_count_score3_zscore <- df_count %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -291,10 +291,10 @@ df4_count_score3_zscore <- df4_count %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_count_score3_zscore, "score3_count_v1.csv")
+write_csv(df_count_score3_zscore, "score3_count_v1.csv")
 
 # Score3 for mean values
-df4_mean_score3_zscore <- df4_mean %>%
+df_mean_score3_zscore <- df_mean %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -325,10 +325,10 @@ df4_mean_score3_zscore <- df4_mean %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_mean_score3_zscore, "score3_mean_v1.csv")
+write_csv(df_mean_score3_zscore, "score3_mean_v1.csv")
 
 # Score3 for sum values
-df4_sum_score3_zscore <- df4_sum %>%
+df_sum_score3_zscore <- df_sum %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -359,10 +359,10 @@ df4_sum_score3_zscore <- df4_sum %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_sum_score3_zscore, "score3_sum_v1.csv")
+write_csv(df_sum_score3_zscore, "score3_sum_v1.csv")
 
 # Score4 for count values
-df4_count_score4_zscore <- df4_count %>%
+df_count_score4_zscore <- df_count %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -394,10 +394,10 @@ df4_count_score4_zscore <- df4_count %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_count_score4_zscore, "score4_count_v1.csv")
+write_csv(df_count_score4_zscore, "score4_count_v1.csv")
 
 # Score4 for mean values
-df4_mean_score4_zscore <- df4_mean %>%
+df_mean_score4_zscore <- df_mean %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -429,10 +429,10 @@ df4_mean_score4_zscore <- df4_mean %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_mean_score4_zscore, "score4_mean_v1.csv")
+write_csv(df_mean_score4_zscore, "score4_mean_v1.csv")
 
 # Score4 for sum values
-df4_sum_score4_zscore <- df4_sum %>%
+df_sum_score4_zscore <- df_sum %>%
   separate(merged_column, 
           into = c("chr", "start", "end", "feature", "score", "strand"),
           sep = ";",
@@ -464,4 +464,4 @@ df4_sum_score4_zscore <- df4_sum %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
 
-write_csv(df4_sum_score4_zscore, "score4_sum_v1.csv")
+write_csv(df_sum_score4_zscore, "score4_sum_v1.csv")
