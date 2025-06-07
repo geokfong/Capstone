@@ -33,6 +33,9 @@ samples=(
 "SKOV3_Tad-FTO_UT_ID8_R62"
 )
 
+/home/onggf/data/software/hisat/hisat-3n/hisat-3n-build --base-change A,G /home/onggf/data/hg38_etam/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa /home/onggf/data/hg38_etam/GRCh38_Tad_AG/GRCh38_Tad_AG
+/home/onggf/data/software/hisat/hisat-3n/hisat-3n-build --base-change C,T /home/onggf/data/hg38_etam/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa /home/onggf/data/hg38_etam/GRCh38_Apo_CT/GRCh38_Apo_CT
+
 genome_fa="/home/onggf/data/hg38_etam/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa"
 ncpus=48
 cov=1
@@ -124,12 +127,5 @@ process_sample() {
 
 echo "Starting analysis..."
 
-for sample_name in "${samples[@]}"; do
-  if [[ "$sample_name" == *"Tad"* ]]; then
-    process_sample "Tad" "$hisat3n_index_tad" "$hisat3n_out_dir_tad"
-  elif [[ "$sample_name" == *"Apo"* ]]; then
-    process_sample "Apo" "$hisat3n_index_apo" "$hisat3n_out_dir_apo"
-  else
-    echo "Skipping unrecognized sample: $sample_name"
-  fi
-done
+process_sample "Tad" "$hisat3n_index_tad" "$hisat3n_out_dir_tad"
+process_sample "Apo" "$hisat3n_index_apo" "$hisat3n_out_dir_apo"
