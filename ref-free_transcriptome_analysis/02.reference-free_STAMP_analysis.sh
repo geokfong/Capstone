@@ -33,14 +33,12 @@ samples=(
 "SKOV3_Tad-FTO_UT_ID8_R62"
 )
 
-# Parameters
 genome_fa="/home/onggf/data/7_STAMP/transcriptome/output_4/transcriptome_clean.fa"
 ncpus=48
 cov=1
 strandness="R"
 parent_folder="/home/onggf/data/7_STAMP/data/3Mar_data/01.final_fastq"
 
-# HISAT-3N Indexes
 hisat3n_index_name_tad="Transcript_AG"
 hisat3n_index_tad="/home/onggf/data/7_STAMP/transcriptome/output_4/$hisat3n_index_name_tad/$hisat3n_index_name_tad"
 hisat3n_out_dir_tad="/home/onggf/data/7_STAMP/data/3Mar_data/SKOV3/03.transcript_analysis"
@@ -49,7 +47,6 @@ hisat3n_index_name_apo="Transcript_CT"
 hisat3n_index_apo="/home/onggf/data/7_STAMP/transcriptome/output_4/$hisat3n_index_name_apo/$hisat3n_index_name_apo"
 hisat3n_out_dir_apo="/home/onggf/data/7_STAMP/data/3Mar_data/SKOV3/03.transcript_analysis"
 
-# Main function
 process_sample() {
   local sample_type=$1
   local hisat3n_index=$2
