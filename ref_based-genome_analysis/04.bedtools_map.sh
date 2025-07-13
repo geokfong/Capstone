@@ -1,6 +1,6 @@
 INPUT_DIR="/Volumes/Lucky me/8_STAMP/bin/03.comparative_analysis"
 REGION_BED="/Volumes/Lucky me/8_STAMP/genemodels/temporary/To_map.bed"
-OUTPUT_DIR="/Volumes/Lucky me/8_STAMP/29apr_mincov10/metrics"
+OUTPUT_DIR="/Volumes/Lucky me/8_STAMP/mincov10/metrics"
 mkdir -p "${OUTPUT_DIR}"
 
 # Define group to type/gene mapping
@@ -64,8 +64,8 @@ done
 
 echo "Processing complete. Results saved to: $OUTPUT_DIR"
 
-INPUT_DIR="/Volumes/Lucky me/8_STAMP/29apr_mincov10/metrics"
-OUTPUT_FILE="/Volumes/Lucky me/8_STAMP/29apr_mincov10/metrics/all_metrics_mincov10_v2.tsv"
+INPUT_DIR="/Volumes/Lucky me/8_STAMP/mincov10/metrics"
+OUTPUT_FILE="/Volumes/Lucky me/8_STAMP/mincov10/metrics/all_metrics_mincov10_v2.tsv"
 TMP_DIR="tmp_processing"
 
 # Clean up temp directory if it exists and create new
