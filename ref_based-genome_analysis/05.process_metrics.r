@@ -109,8 +109,8 @@ df_count_score1 <- df_count %>%
     ratio_ApoFTO = (SKOV3_Apo_FTO_BT1_count^2) / SKOV3_Apo_FTO_UT_count,
     ratio_TadFTO = (SKOV3_Tad_FTO_BT1_count^2) / SKOV3_Tad_FTO_UT_count,
     Combined_Score = if_else(ratio_RIPK1 > 0 & ratio_ApoFTO > 0 & ratio_TadFTO > 0,
-                           rowMeans(cbind(ratio_RIPK1, ratio_ApoFTO, ratio_TadFTO)),
-                           NA_real_)
+                             ratio_RIPK1 * ratio_ApoFTO * ratio_TadFTO,
+                             NA_real_)
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -136,8 +136,8 @@ df_mean_score1 <- df_mean %>%
     ratio_ApoFTO = (SKOV3_Apo_FTO_BT1_mean^2) / SKOV3_Apo_FTO_UT_mean,
     ratio_TadFTO = (SKOV3_Tad_FTO_BT1_mean^2) / SKOV3_Tad_FTO_UT_mean,
     Combined_Score = if_else(ratio_RIPK1 > 0 & ratio_ApoFTO > 0 & ratio_TadFTO > 0,
-                           rowMeans(cbind(ratio_RIPK1, ratio_ApoFTO, ratio_TadFTO)),
-                           NA_real_)
+                             ratio_RIPK1 * ratio_ApoFTO * ratio_TadFTO,
+                             NA_real_)
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -164,8 +164,8 @@ df_sum_score1 <- df_sum %>%
     ratio_ApoFTO = (SKOV3_Apo_FTO_BT1_sum^2) / SKOV3_Apo_FTO_UT_sum,
     ratio_TadFTO = (SKOV3_Tad_FTO_BT1_sum^2) / SKOV3_Tad_FTO_UT_sum,
     Combined_Score = if_else(ratio_RIPK1 > 0 & ratio_ApoFTO > 0 & ratio_TadFTO > 0,
-                           rowMeans(cbind(ratio_RIPK1, ratio_ApoFTO, ratio_TadFTO)),
-                           NA_real_)
+                             ratio_RIPK1 * ratio_ApoFTO * ratio_TadFTO,
+                             NA_real_)
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -193,8 +193,8 @@ df_count_score2_log <- df_count %>%
   ) %>%
   mutate(
     Combined_Score = if_else(ratio_RIPK1 > 0 & ratio_ApoFTO > 0 & ratio_TadFTO > 0,
-                           rowMeans(cbind(ratio_RIPK1, ratio_ApoFTO, ratio_TadFTO)),
-                           NA_real_)
+                             ratio_RIPK1 * ratio_ApoFTO * ratio_TadFTO,
+                             NA_real_)
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -222,8 +222,8 @@ df_mean_score2_log <- df_mean %>%
   ) %>%
   mutate(
     Combined_Score = if_else(ratio_RIPK1 > 0 & ratio_ApoFTO > 0 & ratio_TadFTO > 0,
-                           rowMeans(cbind(ratio_RIPK1, ratio_ApoFTO, ratio_TadFTO)),
-                           NA_real_)
+                             ratio_RIPK1 * ratio_ApoFTO * ratio_TadFTO,
+                             NA_real_)
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -251,8 +251,8 @@ df_sum_score2_log <- df_sum %>%
   ) %>%
   mutate(
     Combined_Score = if_else(ratio_RIPK1 > 0 & ratio_ApoFTO > 0 & ratio_TadFTO > 0,
-                           rowMeans(cbind(ratio_RIPK1, ratio_ApoFTO, ratio_TadFTO)),
-                           NA_real_)
+                             ratio_RIPK1 * ratio_ApoFTO * ratio_TadFTO,
+                             NA_real_)
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -285,8 +285,8 @@ df_count_score3_zscore <- df_count %>%
   ) %>%
   mutate(
     Combined_Score = if_else(RIPK1_zscore > 0 & ApoFTO_zscore > 0 & TadFTO_zscore > 0,
-                           rowMeans(cbind(RIPK1_zscore, ApoFTO_zscore, TadFTO_zscore)),
-                           NA_real_)
+                             RIPK1_zscore * ApoFTO_zscore * TadFTO_zscore,
+                             NA_real_) 
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -319,8 +319,8 @@ df_mean_score3_zscore <- df_mean %>%
   ) %>%
   mutate(
     Combined_Score = if_else(RIPK1_zscore > 0 & ApoFTO_zscore > 0 & TadFTO_zscore > 0,
-                           rowMeans(cbind(RIPK1_zscore, ApoFTO_zscore, TadFTO_zscore)),
-                           NA_real_)
+                             RIPK1_zscore * ApoFTO_zscore * TadFTO_zscore,
+                             NA_real_) 
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -353,8 +353,8 @@ df_sum_score3_zscore <- df_sum %>%
   ) %>%
   mutate(
     Combined_Score = if_else(RIPK1_zscore > 0 & ApoFTO_zscore > 0 & TadFTO_zscore > 0,
-                           rowMeans(cbind(RIPK1_zscore, ApoFTO_zscore, TadFTO_zscore)),
-                           NA_real_)
+                             RIPK1_zscore * ApoFTO_zscore * TadFTO_zscore,
+                             NA_real_)
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -388,8 +388,8 @@ df_count_score4_zscore <- df_count %>%
   ) %>%
   mutate(
     Combined_Score = if_else(RIPK1_zscore > 0 & ApoFTO_zscore > 0 & TadFTO_zscore > 0,
-                           rowMeans(cbind(RIPK1_zscore, ApoFTO_zscore, TadFTO_zscore)),
-                           NA_real_)
+                             RIPK1_zscore * ApoFTO_zscore * TadFTO_zscore,
+                             NA_real_) 
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -423,8 +423,8 @@ df_mean_score4_zscore <- df_mean %>%
   ) %>%
   mutate(
     Combined_Score = if_else(RIPK1_zscore > 0 & ApoFTO_zscore > 0 & TadFTO_zscore > 0,
-                           rowMeans(cbind(RIPK1_zscore, ApoFTO_zscore, TadFTO_zscore)),
-                           NA_real_)
+                             RIPK1_zscore * ApoFTO_zscore * TadFTO_zscore,
+                             NA_real_) 
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
@@ -458,8 +458,8 @@ df_sum_score4_zscore <- df_sum %>%
   ) %>%
   mutate(
     Combined_Score = if_else(RIPK1_zscore > 0 & ApoFTO_zscore > 0 & TadFTO_zscore > 0,
-                           rowMeans(cbind(RIPK1_zscore, ApoFTO_zscore, TadFTO_zscore)),
-                           NA_real_)
+                             RIPK1_zscore * ApoFTO_zscore * TadFTO_zscore,
+                             NA_real_) 
   ) %>%
   select(-region_size, everything(), region_size) %>%
   arrange(desc(Combined_Score))
